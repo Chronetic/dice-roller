@@ -41,10 +41,6 @@ this parameter, so the usage is simply adding `?roll` to the url.
 
 To disable the rendering of shadows for rolled dice, add `shadows=0` to the URL. Note that this does not affect the shadows on the selection screen, only the shadows present during the rolling of dice.
 
-### Demo
-
-![](dice-roller-demo.gif)
-
 ### Copyright
 
 All rights to the original code belong to [Anton Naratov](http://www.teall.info/). This project merely builds upon his work.
