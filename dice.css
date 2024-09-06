@@ -26,10 +26,10 @@
 
 #label {
     font-size: 32pt;
-    word-spacing: 0.5em;
-    padding: 5px 15px;
-    color: rgba(21, 26, 26, 0.6);
-    top: 45%;
+    word-spacing: 0.3em;
+    padding: 0px 15px;
+    color: rgb(0, 0, 0);
+    top: 20%;
 }
 
 #labelhelp {
@@ -48,6 +48,15 @@
     top: 60%;
 }
 
+#team {
+    text-align: center;
+    font-size: 26pt;
+    border: none;
+    color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(255, 255, 255, 0);
+    top: 60%;
+}
+
 #sethelp {
     font-size: 12pt;
     color: rgba(21, 26, 26, 0.5);
@@ -55,7 +64,7 @@
     top: 25%;
 }
 
-#selector_div button {
+.buttonC {
     font-size: 20pt;
     color: rgb(255, 255, 255);
     background-color: rgba(0, 0, 0, 0.6);
