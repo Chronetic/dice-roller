@@ -8,6 +8,7 @@ function dice_initialize(container) {
     canvas.style.height = window.innerHeight - 1 + 'px';
     var label = $t.id('label');
     var set = $t.id('set');
+    var team = $t.id('team');
     var selector_div = $t.id('selector_div');
     var info_div = $t.id('info_div');
     on_set_change();
@@ -28,6 +29,7 @@ function dice_initialize(container) {
     });
 
     var params = $t.get_url_params();
+    console.log(params);
 
     if (params.chromakey) {
         $t.dice.desk_color = 0x00ff00;
@@ -107,9 +109,25 @@ function dice_initialize(container) {
         return $t.dice.parse_notation(set.value);
     }
 
+    // Thing to update
     function after_roll(notation, result) {
         if (params.chromakey || params.noresult) return;
+        console.log(notation)
+        console.log(result)
+        if (notation.teamMembers) {
+            let array = notation.teamMembers
+            var res = "Roll Results:" + "<br/>"
+            for (let index = 0; index < array.length; index++) {
+                const element = array[index];
+                res += "" + array[index] + " : " + "" + result[index] + "<br/>"
+            }
+            console.log(res)
+            label.innerHTML = res;
+            info_div.style.display = 'inline-block';
+            return;
+        }
         var res = result.join(' + ');
+        //console.log(res)
         if (notation.constant) {
             res += ' (';
             if (notation.constant > 0) res += '+' + notation.constant;
@@ -143,6 +161,9 @@ function dice_initialize(container) {
 
     if (params.notation) {
         set.value = params.notation;
+    }
+    if (params.team) {
+        //add variable for team
     }
     if (params.roll) {
         $t.raise_event($t.id('throw'), 'mouseup');
