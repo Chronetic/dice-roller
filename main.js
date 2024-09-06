@@ -1,5 +1,14 @@
 "use strict";
 
+//  Main TODOs:
+//      - Add team names hardcoded for teamName
+//          - Add team names to some kind of config file in code
+//          - Add gui for adding names to the teamNames config file
+//      - Add in way to manually select names like you would select Dice on homepage
+//      - figure out how the mouse tracking / dice selection works and get rid of it
+//      - Remake UI to something a little different after we get rid of mouse tracking stuff
+
+
 function dice_initialize(container) {
     $t.remove($t.id('loading_text'));
 
