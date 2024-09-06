@@ -1,5 +1,6 @@
 # Interactive 3D Dice Roller
 ##### Sourced from [a.teal.info/dice](https://a.teal.info/dice)
+##### Forked from [https://github.com/Matteas-Eden/dice-roller](https://github.com/Matteas-Eden/dice-roller)
 
 An online, interactive 3D dice roller that utlilises `three.js` and `cannon.js`. Using the API provided by [random.org](https://random.org), generates truly random rolls for any combination of d4, d6, d8, d10, d12, d20 and d100. The physics seen on-screen is merely for show - all values are derived from atmospheric noise.
 
@@ -7,7 +8,7 @@ An online, interactive 3D dice roller that utlilises `three.js` and `cannon.js`.
 
 #### URL Parameters
 
-There are several parameters that can be passed into the URL. To use a parameter, the syntax is `matteas.nz/dice-roller?<param>[=<value>]`
+There are several parameters that can be passed into the URL. To use a parameter, the syntax is `chronetic.github.io/dice-roller/?<param>[=<value>]`
 
 ##### Color
 By adding `color=<color>` to the URL, you can change the colour of the dice. Without this parameter specified, the default is black. The currently supported colours are:
@@ -34,7 +35,7 @@ By adding `notation=<notation>` to the URL, you can set the dice roll to be exec
 
 By adding `roll` to the URL, you can intiate a rolling of dice directly without
 the need to press the button on the site. There is no value associated with
-this parameter, so the usage is simply `matteas.nz/dice-roller?roll`.
+this parameter, so the usage is simply adding `?roll` to the url.
 
 ##### Shadows
 
@@ -43,10 +44,6 @@ To disable the rendering of shadows for rolled dice, add `shadows=0` to the URL.
 ### Demo
 
 ![](dice-roller-demo.gif)
-
-### License
-
-*Interactive 3D Dice Roller* is licensed under the MIT License.
 
 ### Copyright
 
