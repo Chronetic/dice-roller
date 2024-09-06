@@ -341,7 +341,17 @@
     }
 
     this.parse_notation = function(notation) {
+        console.log(notation)
+        
+        // break off if using Team name for notation
+        if (notation === "EPS") {
+            var ret = { set: ['d20', 'd20', 'd20', 'd20', 'd20', 'd20', 'd20', 'd20', 'd20', 'd20', 'd20'], constant: 0, result: [], teamMembers: ["name1", "name2", "name3", "name4", "name5", "name6", "name7", "name8", "name9", "name10", "name11"], error: false }, res;
+            console.log(ret)
+            return ret;
+        }
+
         var no = notation.split('@');
+        console.log(no)
         var dr0 = /\s*(\d*)([a-z]+)(\d+)(\s*(\+|\-)\s*(\d+)){0,1}\s*(\+|$)/gi;
         var dr1 = /(\b)*(\d+)(\b)*/gi;
         var ret = { set: [], constant: 0, result: [], error: false }, res;
@@ -361,6 +371,7 @@
         while (res = dr1.exec(no[1])) {
             ret.result.push(parseInt(res[2]));
         }
+        console.log(ret)
         return ret;
     }
 
@@ -770,7 +781,9 @@
             }
         }
         vector.x /= dist; vector.y /= dist;
+        console.log(box)
         var notation = notation_getter.call(box);
+        console.log(notation)
         if (notation.set.length == 0) return;
         var vectors = box.generate_vectors(notation, vector, boost);
         box.rolling = true;
