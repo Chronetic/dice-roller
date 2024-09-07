@@ -171,6 +171,8 @@
         for (var i = 0; i < face_labels.length; ++i)
             materials.push(new THREE.MeshPhongMaterial($t.copyto(this.material_options,
                         { map: create_text_texture(face_labels[i], this.label_color, this.dice_color) })));
+
+        console.log(materials)
         return materials;
     }
 
@@ -790,7 +792,8 @@
         if (before_roll) before_roll.call(box, vectors, notation, roll);
         else roll();
     }
-
+    // Commented out because the only use of this I think is the drag to throw feature - which we do not need
+/*
     this.dice_box.prototype.bind_mouse = function(container, notation_getter, before_roll, after_roll) {
         var box = this;
         $t.bind(container, ['mousedown', 'touchstart'], function(ev) {
@@ -815,7 +818,7 @@
             });
         });
     }
-
+*/
     this.dice_box.prototype.bind_throw = function(button, notation_getter, before_roll, after_roll) {
         var box = this;
         $t.bind(button, ['mouseup', 'touchend'], function(ev) {
