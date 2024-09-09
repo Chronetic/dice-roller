@@ -146,15 +146,153 @@
         return Math.pow(2, Math.floor(Math.log(approx) / Math.log(2)));
     }
 
-    this.create_dice_materials = function(face_labels, size, margin) {
-        function create_text_texture(text, color, back_color) {
+    this.create_dice_materials_test = function(face_labels, size, margin, mat) {
+
+/*      -------------------------------------------------------------------------
+        const patternCanvas = document.createElement("canvas");
+        const patternContext = patternCanvas.getContext("2d");
+
+        // Give the pattern a width and height of 50
+        patternCanvas.width = 50;
+        patternCanvas.height = 50;
+
+        // Give the pattern a background color and draw an arc
+        patternContext.fillStyle = "#323d34";
+        patternContext.fillRect(0, 0, patternCanvas.width, patternCanvas.height);
+        patternContext.arc(0, 0, 50, 0, 0.5 * Math.PI);
+        patternContext.stroke();
+        --------------------------------------------------------------------------
+*/
+        console.log(mat)
+        // Refactor to remove duplication - too lazy right now
+        if (mat == "pat1")
+        {
+            var patternCanvas = document.createElement("canvas");
+            var patternContext = patternCanvas.getContext("2d");
+
+            // Give the pattern a width and height of 50
+            patternCanvas.width = 50;
+            patternCanvas.height = 50;
+
+            // Give the pattern a background color and draw an arc
+            patternContext.fillStyle = "#323d34";
+            patternContext.fillRect(0, 0, patternCanvas.width, patternCanvas.height);
+            patternContext.arc(0, 0, 50, 0, 0.5 * Math.PI);
+            patternContext.stroke();
+        }
+        else if (mat == "pat2")
+        {
+            var patternCanvas = document.createElement("canvas");
+            var patternContext = patternCanvas.getContext("2d");
+    
+            // Give the pattern a width and height of 50
+            patternCanvas.width = 50;
+            patternCanvas.height = 50;
+    
+            // Give the pattern a background color and draw an arc
+            patternContext.fillStyle = "#b000ff";
+            patternContext.fillRect(0, 0, patternCanvas.width, patternCanvas.height);
+            patternContext.arc(0, 0, 50, 0, 0.5 * Math.PI);
+            patternContext.stroke();
+        }
+        else if (mat == "pat3")
+        {
+            var patternCanvas = document.createElement("canvas");
+            var patternContext = patternCanvas.getContext("2d");
+    
+            // Give the pattern a width and height of 50
+            patternCanvas.width = 50;
+            patternCanvas.height = 50;
+    
+            // Give the pattern a background color and draw an arc
+            patternContext.fillStyle = "#ff0000";
+            patternContext.fillRect(0, 0, patternCanvas.width, patternCanvas.height);
+            patternContext.arc(0, 0, 50, 0, 0.5 * Math.PI);
+            patternContext.stroke();
+        }
+
+        function create_text_texture_test(text, color, back_color) {
             if (text == undefined) return null;
             var canvas = document.createElement("canvas");
             var context = canvas.getContext("2d");
+
+/*          -------------------------------------------------------------------------
+            const gradient = context.createRadialGradient(110, 90, 30, 100, 100, 70);
+            // Add three color stops
+            gradient.addColorStop(0, "pink");
+            gradient.addColorStop(0.9, "white");
+            gradient.addColorStop(1, "green");
+            --------------------------------------------------------------------------
+*/          
+            if (mat == "grad1") 
+            {
+                var gradient = context.createRadialGradient(110, 90, 30, 100, 100, 70);
+                // Add three color stops
+                gradient.addColorStop(0, "red");
+                gradient.addColorStop(0.9, "blue");
+                gradient.addColorStop(1, "green");
+            }
+            else if (mat == "grad2") 
+            {
+                var gradient = context.createRadialGradient(110, 90, 30, 100, 100, 70);
+                // Add three color stops
+                gradient.addColorStop(0, "black");
+                gradient.addColorStop(0.9, "purple");
+                gradient.addColorStop(1, "green");
+            }
+            else if (mat == "grad3") 
+            {
+                var gradient = context.createRadialGradient(110, 90, 30, 100, 100, 70);
+                // Add three color stops
+                gradient.addColorStop(0, "pink");
+                gradient.addColorStop(0.9, "white");
+                gradient.addColorStop(1, "green");
+            }
+                
+
             var ts = calc_texture_size(size + size * 2 * margin) * 2;
             canvas.width = canvas.height = ts;
             context.font = ts / (1 + 2 * margin) + "pt Arial";
-            context.fillStyle = back_color;
+
+            //--------------------------------
+            //context.fillStyle = back_color;
+            //--------------------------------
+
+            //---------------------------------------------------------------
+            //const pattern = context.createPattern(patternCanvas, "repeat");
+            //context.fillStyle = pattern;
+            //----------------------------
+
+            //-----------------------------
+            //context.fillStyle = gradient;
+            //-----------------------------
+            
+            //pls refactor I beg
+            if (mat == "pat1") {
+                const pattern = context.createPattern(patternCanvas, "repeat");
+                context.fillStyle = pattern;
+            }
+            else if (mat == "pat2") {
+                const pattern = context.createPattern(patternCanvas, "repeat");
+                context.fillStyle = pattern;
+            }
+            else if (mat == "pat3") {
+                const pattern = context.createPattern(patternCanvas, "repeat");
+                context.fillStyle = pattern;
+            }
+            else if (mat == "grad1") {
+                context.fillStyle = gradient;
+            }
+            else if (mat == "grad2") {
+                context.fillStyle = gradient;
+            }
+            else if (mat == "grad3") {
+                context.fillStyle = gradient;
+            }
+            else {
+                context.fillStyle = back_color;
+            }
+
             context.fillRect(0, 0, canvas.width, canvas.height);
             context.textAlign = "center";
             context.textBaseline = "middle";
@@ -170,11 +308,82 @@
         var materials = [];
         for (var i = 0; i < face_labels.length; ++i)
             materials.push(new THREE.MeshPhongMaterial($t.copyto(this.material_options,
-                        { map: create_text_texture(face_labels[i], this.label_color, this.dice_color) })));
+                        { map: create_text_texture_test(face_labels[i], this.label_color, this.dice_color) })));
 
         console.log(materials)
         return materials;
     }
+
+    this.create_dice_materials = function(face_labels, size, margin) {
+
+        /*      -------------------------------------------------------------------------
+                const patternCanvas = document.createElement("canvas");
+                const patternContext = patternCanvas.getContext("2d");
+        
+                // Give the pattern a width and height of 50
+                patternCanvas.width = 50;
+                patternCanvas.height = 50;
+        
+                // Give the pattern a background color and draw an arc
+                patternContext.fillStyle = "#323d34";
+                patternContext.fillRect(0, 0, patternCanvas.width, patternCanvas.height);
+                patternContext.arc(0, 0, 50, 0, 0.5 * Math.PI);
+                patternContext.stroke();
+                --------------------------------------------------------------------------
+        */
+        
+                function create_text_texture(text, color, back_color) {
+                    if (text == undefined) return null;
+                    var canvas = document.createElement("canvas");
+                    var context = canvas.getContext("2d");
+        
+        /*          -------------------------------------------------------------------------
+                    const gradient = context.createRadialGradient(110, 90, 30, 100, 100, 70);
+                    // Add three color stops
+                    gradient.addColorStop(0, "pink");
+                    gradient.addColorStop(0.9, "white");
+                    gradient.addColorStop(1, "green");
+                    --------------------------------------------------------------------------
+        */          
+        
+                    var ts = calc_texture_size(size + size * 2 * margin) * 2;
+                    canvas.width = canvas.height = ts;
+                    context.font = ts / (1 + 2 * margin) + "pt Arial";
+        
+                    //--------------------------------
+                    //context.fillStyle = back_color;
+                    //--------------------------------
+        
+                    //---------------------------------------------------------------
+                    //const pattern = context.createPattern(patternCanvas, "repeat");
+                    //context.fillStyle = pattern;
+                    //----------------------------
+        
+                    //-----------------------------
+                    //context.fillStyle = gradient;
+                    //-----------------------------
+        
+                    context.fillStyle = back_color;
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+                    context.textAlign = "center";
+                    context.textBaseline = "middle";
+                    context.fillStyle = color;
+                    context.fillText(text, canvas.width / 2, canvas.height / 2);
+                    if (text == '6' || text == '9') {
+                        context.fillText('  .', canvas.width / 2, canvas.height / 2);
+                    }
+                    var texture = new THREE.Texture(canvas);
+                    texture.needsUpdate = true;
+                    return texture;
+                }
+                var materials = [];
+                for (var i = 0; i < face_labels.length; ++i)
+                    materials.push(new THREE.MeshPhongMaterial($t.copyto(this.material_options,
+                                { map: create_text_texture(face_labels[i], this.label_color, this.dice_color) })));
+        
+                console.log(materials)
+                return materials;
+            }
 
     var d4_labels = [
         [[], [0, 0, 0], [2, 4, 3], [1, 3, 4], [2, 1, 4], [1, 2, 3]],
@@ -328,10 +537,24 @@
         return new THREE.Mesh(this.d12_geometry, this.dice_material);
     }
 
+    // this might be where the material needs to be added
+    // Make sure that this.dice_material is cleared before the function is over, otherwise the material will be the same for each die
+    this.Test_create_d20 = function(mat) {
+        if (!this.d20_geometry) this.d20_geometry = this.create_d20_geometry(this.scale);
+        if (!this.dice_material) this.dice_material = new THREE.MeshFaceMaterial(
+                this.create_dice_materials_test(this.standart_d20_dice_face_labels, this.scale / 2, 1.0, mat));
+                console.log(this.dice_material)
+
+        var diceMat = this.dice_material
+        this.dice_material = 0;
+        return new THREE.Mesh(this.d20_geometry, diceMat);
+    }
+
     this.create_d20 = function() {
         if (!this.d20_geometry) this.d20_geometry = this.create_d20_geometry(this.scale);
         if (!this.dice_material) this.dice_material = new THREE.MeshFaceMaterial(
                 this.create_dice_materials(this.standart_d20_dice_face_labels, this.scale / 2, 1.0));
+                console.log(this.dice_material)
         return new THREE.Mesh(this.d20_geometry, this.dice_material);
     }
 
@@ -344,16 +567,15 @@
 
     this.parse_notation = function(notation) {
         console.log(notation)
-        
+        // maybe use this to pull in the logic that determines the materials
         // break off if using Team name for notation
         if (notation === "EPS") {
-            var ret = { set: ['d20', 'd20', 'd20', 'd20', 'd20', 'd20', 'd20', 'd20', 'd20', 'd20', 'd20'], constant: 0, result: [], teamMembers: ["name1", "name2", "name3", "name4", "name5", "name6", "name7", "name8", "name9", "name10", "name11"], error: false }, res;
+            var ret = { set: ['d20', 'd20', 'd20', 'd20', 'd20', 'd20', 'd20', 'd20', 'd20', 'd20', 'd20'], constant: 0, result: [], teamMembers: ["Tyler", "Jake", "Jake", "Ridge", "Matt", "Maddy", "Jane", "Declan", "Walter", "Kyle", "Dan"], mats: ["pat1", "pat2", "pat3", "grad1", "grad2", "grad3", "co1", "co2", "co3", "pat4", "grad4"], error: false }, res;
             console.log(ret)
             return ret;
         }
 
         var no = notation.split('@');
-        console.log(no)
         var dr0 = /\s*(\d*)([a-z]+)(\d+)(\s*(\+|\-)\s*(\d+)){0,1}\s*(\+|$)/gi;
         var dr1 = /(\b)*(\d+)(\b)*/gi;
         var ret = { set: [], constant: 0, result: [], error: false }, res;
@@ -539,6 +761,25 @@
         return vectors;
     }
 
+    // just pushes dice into everything sooooo I guess we can make unique dice happen here
+    this.dice_box.prototype.create_dice_test = function(type, pos, velocity, angle, axis, mat) {
+        console.log(mat)
+        var dice = that['Test_create_' + type](mat);
+        dice.castShadow = true;
+        dice.dice_type = type;
+        dice.body = new CANNON.RigidBody(that.dice_mass[type],
+                dice.geometry.cannon_shape, this.dice_body_material);
+        dice.body.position.set(pos.x, pos.y, pos.z);
+        dice.body.quaternion.setFromAxisAngle(new CANNON.Vec3(axis.x, axis.y, axis.z), axis.a * Math.PI * 2);
+        dice.body.angularVelocity.set(angle.x, angle.y, angle.z);
+        dice.body.velocity.set(velocity.x, velocity.y, velocity.z);
+        dice.body.linearDamping = 0.1;
+        dice.body.angularDamping = 0.1;
+        this.scene.add(dice);
+        this.dices.push(dice);
+        this.world.add(dice.body);
+    }
+
     this.dice_box.prototype.create_dice = function(type, pos, velocity, angle, axis) {
         var dice = that['create_' + type]();
         dice.castShadow = true;
@@ -670,21 +911,27 @@
         setTimeout(function() { box.renderer.render(box.scene, box.camera); }, 100);
     }
 
-    this.dice_box.prototype.prepare_dices_for_roll = function(vectors) {
+    this.dice_box.prototype.prepare_dices_for_roll = function(vectors, mats) {
         this.clear();
         this.iteration = 0;
+        console.log(vectors)
         for (var i in vectors) {
-            this.create_dice(vectors[i].set, vectors[i].pos, vectors[i].velocity,
-                    vectors[i].angle, vectors[i].axis);
+            //this.create_dice(vectors[i].set, vectors[i].pos, vectors[i].velocity,
+                    //vectors[i].angle, vectors[i].axis);
+            this.create_dice_test(vectors[i].set, vectors[i].pos, vectors[i].velocity,
+                vectors[i].angle, vectors[i].axis, mats[i]);
         }
     }
 
+    // no clue what this does tbh
+    /*  
     function shift_dice_faces(dice, value, res) {
         var r = that.dice_face_range[dice.dice_type];
         if (dice.dice_type == 'd10' && value == 10) value = 0;
         if (!(value >= r[0] && value <= r[1])) return;
         var num = value - res;
         var geom = dice.geometry.clone();
+        console.log(geom)
         for (var i = 0, l = geom.faces.length; i < l; ++i) {
             var matindex = geom.faces[i].materialIndex;
             if (matindex == 0) continue;
@@ -700,22 +947,26 @@
         }
         dice.geometry = geom;
     }
+*/
+    this.dice_box.prototype.roll = function(vectors, values, callback, mats) {
+        this.prepare_dices_for_roll(vectors, mats);
 
-    this.dice_box.prototype.roll = function(vectors, values, callback) {
-        this.prepare_dices_for_roll(vectors);
         if (values != undefined && values.length) {
             this.use_adapvite_timestep = false;
             var res = this.emulate_throw();
-            this.prepare_dices_for_roll(vectors);
+            this.prepare_dices_for_roll(vectors, mats);
             for (var i in res)
                 shift_dice_faces(this.dices[i], values[i], res[i]);
         }
+
         this.callback = callback;
         this.running = (new Date()).getTime();
         this.last_time = 0;
         this.__animate(this.running);
     }
 
+    // not used I guess
+/*
     this.dice_box.prototype.__selector_animate = function(threadid) {
         var time = (new Date()).getTime();
         var time_diff = (time - this.last_time) / 1000;
@@ -769,9 +1020,11 @@
         if (this.animate_selector) this.__selector_animate(this.running);
         else this.renderer.render(this.scene, this.camera);
     }
+*/
 
     function throw_dices(box, vector, boost, dist, notation_getter, before_roll, after_roll) {
         var uat = $t.dice.use_adapvite_timestep;
+    
         function roll(request_results) {
             if (after_roll) {
                 box.clear();
@@ -779,9 +1032,10 @@
                     if (after_roll) after_roll.call(box, notation, result);
                     box.rolling = false;
                     $t.dice.use_adapvite_timestep = uat;
-                });
+                }, notation.mats);
             }
         }
+    
         vector.x /= dist; vector.y /= dist;
         console.log(box)
         var notation = notation_getter.call(box);
