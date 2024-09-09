@@ -12,6 +12,16 @@
 //      - Remake UI to something a little different after we get rid of mouse tracking stuff
 //          - Update Results UI
 //      - Connect to Database of some kind to track data about rolls
+/*
+bind_throw
+    ->start_throw
+        ->throw_dices ---> This is where we figure out mats I think using notations
+            ->roll
+                ->prepare_dices_for_roll
+                    ->create_dice_test
+                        ->Test_create_d20
+                            ->create_dice_materials_test ---> use the mats value to determine what material to give a specific dice
+*/
 
 function dice_initialize(container) {
     $t.remove($t.id('loading_text'));
