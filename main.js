@@ -96,13 +96,14 @@ function dice_initialize(container) {
 
     // This does the post roll selection stuff - probably dice selection too
     // Breaks the normal homepage when it is commented
-/*
+//---------------------------------------------------------
     function show_selector() {
         info_div.style.display = 'none';
         selector_div.style.display = 'inline-block';
-        box.draw_selector();
+        //box.draw_selector();
     }
-*/
+//---------------------------------------------------------
+
     function before_roll(vectors, notation, callback) {
         info_div.style.display = 'none';
         selector_div.style.display = 'none';
